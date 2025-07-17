@@ -7,12 +7,29 @@
   <style>
     body { margin: 0; padding: 0; }
     #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+	#title {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  margin: 0;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 42px;
+  font-weight: 700;
+  z-index: 999;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
   </style>
   <!-- Mapbox CSS -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+
+
 </head>
 <body>
+  <h1 id="title">The f*cking Map</h1>
   <div id="map"></div>
+
 
   <!-- Mapbox JS -->
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
