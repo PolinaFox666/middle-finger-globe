@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Mapbox Globe with Points</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { margin: 0; padding: 0; }
+    #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+  </style>
+  <!-- Mapbox CSS -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+</head>
+<body>
+  <div id="map"></div>
+
+  <!-- Mapbox JS -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoia2x5YWtzb25jaGlrIiwiYSI6ImNtZDdmazJzYzA0ZWkyam9kZ2RqZmNudHMifQ.1Oue3jwwp_l77nxJt2gOKA'; // <-- вставь сюда свой токен
+
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/outdoors-v12',
+      projection: 'globe', // 🌍 Включаем глобус
+      zoom: 1.5,
+      center: [0, 20]
+    });
+
+    map.on('style.load', () => {
+      map.setFog({}); // атмосферный эффект 🌫️
+
+      // 📍Добавляем пользовательские точки
+      const geojson = {
+        type: 'FeatureCollection',
+        features: [
+          {
+            type: 'Feature',
+            properties: { 
+			title: 'Tivat',
+			image: 'https://i.postimg.cc/8PSNKsQB/0001-tivat.jpg'
+			},
+            geometry: { type: 'Point', coordinates: [18.6966, 42.4311] }
+          },
+          {
+            type: 'Feature',
+            properties: { 
+			title: 'Lipetsk',
+			image: 'https://i.postimg.cc/WbS2Kj7D/0002-lipetsk.jpg'
+			},
+            geometry: { type: 'Point', coordinates: [39.5942, 52.6100] }
+          }
+        ]
+      };
+
+      for (const feature of geojson.features) {
+        const el = document.createElement('div');
+        el.className = 'marker';
+        el.style.width = '12px';
+        el.style.height = '12px';
+        el.style.background = 'red';
+        el.style.borderRadius = '50%';
+        el.style.boxShadow = '0 0 4px white';
+
+        new mapboxgl.Marker(el)
+          .setLngLat(feature.geometry.coordinates)
+          .setPopup(new mapboxgl.Popup().setHTML(
+  `<div style="max-width: 200px">
+     <strong>${feature.properties.title}</strong><br>
+     <img src="${feature.properties.image}" style="width: 100%; border-radius: 6px; margin-top: 6px;" />
+   </div>`
+))
+          .addTo(map);
+      }
+    });
+  </script>
+</body>
+</html>
