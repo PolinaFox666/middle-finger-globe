@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Globe of Fingers</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: black;
+    }
+    #globeViz {
+      width: 100vw;
+      height: 100vh;
+    }
+    #popup {
+      position: absolute;
+      display: none;
+      background: rgba(0,0,0,0.8);
+      border: 1px solid #fff;
+      color: white;
+      padding: 10px;
+      border-radius: 6px;
+      z-index: 10;
+    }
+    #popup img {
+      max-width: 200px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div id="globeViz"></div>
+  <div id="popup"><img id="popupImg" src="" alt=""></div>
+
+  <script src="https://unpkg.com/globe.gl"></script>
+  <script src="main.js"></script>
+</body>
+</html>
